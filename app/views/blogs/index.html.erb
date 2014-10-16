@@ -1,0 +1,10 @@
+<b> All Blogs in the System </b>
+
+<% @blogs.each do |blog| %>
+	<div style="margin:5px;border-bottom:2px solid red;">
+		<%= blog.title %> <br/>
+		<%= blog.description %> <br/>
+		<%= blog.author %> - <%= blog.keywords %> <br/>
+		<%= blog.created_at %>
+	</div>
+<% end %>
