@@ -1,0 +1,11 @@
+<p><%= flash[:notice] %> </p> <br/><br/>
+
+<b><%= @blog.title %></b>
+<br/>
+<p><%= @blog.keywords %></p>
+<p><%= @blog.author %></p>
+<hr/>
+
+<p><%= @blog.description %></p> 
+<hr/>
+<%= link_to "Back to Index", blogs_path %> | <%= link_to "Edit", edit_blog_path(@blog) %> | <%= link_to "Delete", blog_path(@blog), :method => "DELETE" %>
