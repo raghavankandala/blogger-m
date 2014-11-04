@@ -9,3 +9,13 @@
 <p><%= @blog.description %></p> 
 <hr/>
 <%= link_to "Back to Index", blogs_path %> | <%= link_to "Edit", edit_blog_path(@blog) %> | <%= link_to "Delete", blog_path(@blog), :method => "DELETE" %>
+<hr/>
+<b> Blog Posts </b><br/>
+<% @blog_posts.each do |bp| %>
+	<div style="border-bottom: 2px dotted #cacaca;padding:10px;">
+	<%= bp.title %> <br/>
+	<%= bp.author %>, <%= bp.published? ? bp.published_at : "[Not Published]" %> <br/>
+	<%= link_to "Read More", blog_post_path(bp) %>
+	</div>
+<% end %>
+

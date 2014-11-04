@@ -11,4 +11,9 @@ class Blog < ActiveRecord::Base
 	validates :description, presence: true
 	validates :author, presence: true
 	validates :keywords, presence: true
+
+	# Associations
+	# Blog has many Blog Posts
+	has_many :blog_posts
+
 end

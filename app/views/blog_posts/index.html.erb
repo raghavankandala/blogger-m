@@ -1,0 +1,16 @@
+<p><%= flash[:notice] %> </p> <br/><br/>
+
+<div style="float:right;"><%= link_to "Create New Blog Post Entry", new_blog_post_path %></div>
+<b> All Blog Posts in the System </b>
+
+<% @blog_posts.each do |bp| %>
+	<div style="margin:5px;border-bottom:2px solid red;">
+		<%= bp.title %> <b> in Blog </b> <%= bp.blog.title %> <br/>
+		<%= bp.summary %> <br/>
+		<%= bp.description %> <br/>
+		<%= bp.author %> - <%= bp.keywords %> <br/>
+		<%= bp.created_at %>
+		<br/> 
+		<%= link_to "Edit", edit_blog_post_path(bp) %> | <%= link_to "Show", blog_post_path(bp) %> | <%= link_to "Delete", blog_post_path(bp), :method => "DELETE" %>
+	</div>
+<% end %>

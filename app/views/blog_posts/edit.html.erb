@@ -1,0 +1,5 @@
+<b> Edit Blog Post Form</b>
+
+<%= render 'form' %>
+
+<%= link_to "Back to List", blog_posts_path %> | <%= link_to "Show", blog_post_path(@blog_post)%> | <%= link_to "Delete", blog_post_path(@blog_post), :method => "DELETE" %>

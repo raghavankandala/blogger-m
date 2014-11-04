@@ -1,0 +1,36 @@
+<div style="border:2px solid red;">
+<% if @blog_post.errors.present? %>
+	<span style="color:red;">Errors in the form</span> <br/>
+<% end %>
+<% @blog_post.errors.full_messages.each do |message| %>
+	<%= message %> <br/>
+<% end %>
+</div>
+
+<%= form_for @blog_post do |f| %>
+	<%= f.label :title %> <br/>
+	<%= f.text_field :title %> 
+	<br/><br/>
+	<%= f.label :summary %><br/>
+	<%= f.text_area :summary %>
+	<br/><br/>
+	<%= f.label :description %><br/>
+	<%= f.text_area :description %>
+	<br/><br/>
+	<%= f.label :author %><br/>
+	<%= f.text_field :author %>
+	<br/><br/>
+	<%= f.label :blog %><br/>
+	<%= f.select :blog_id, Blog.all.collect {|b| [b.title, b.id] }, :include_blank => true  %>
+	<br/><br/>
+	<%= f.label :keywords %><br/>
+	<%= f.text_field :keywords %>
+	<br/><br/>
+	<%= f.label :published %><br/>
+	<%= f.text_field :published %>
+	<br/><br/>
+	<%= f.label :published_at %><br/>
+	<%= f.text_field :published_at %>
+	<br/><br/>
+	<%= f.submit %>
+<% end %>

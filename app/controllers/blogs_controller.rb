@@ -43,6 +43,7 @@ class BlogsController < ApplicationController
 
 	def show
 		@blog = Blog.find(params[:id])
+		@blog_posts = @blog.blog_posts.order("created_at DESC")
 		#render :layout => false # Turn off layout for this action alone
 		render :layout => 'application' # This action alone uses admin layout irrespective of what layout the controller is configured with
 	end
