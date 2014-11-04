@@ -10,4 +10,4 @@
 <p><%= @blog_post.description %></p> 
 <p><%= @blog_post.published? ? @blog_post.published_at : "[Not Published]" %></p> 
 <hr/>
-<%= link_to "Back to Index", blog_posts_path %> | <%= link_to "Edit", edit_blog_post_path(@blog_post) %> | <%= link_to "Delete", blog_post_path(@blog_post), :method => "DELETE" %>
+<%= link_to "Back to Index", blog_blog_posts_path(@blog_post.blog) %> | <%= link_to "Edit", edit_blog_blog_post_path(@blog_post, @blog_post.blog) %> | <%= link_to "Delete", blog_blog_post_path(@blog_post.blog, @blog_post), :method => "DELETE" %>

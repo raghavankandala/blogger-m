@@ -1,5 +1,7 @@
 class BlogPostsController < ApplicationController
 
+	before_filter :load_blog
+	before_filter :load_blog_post, :except => [:new, :create, :index]
 
 	# Through this controller, we should be able to 
 	# 1. Create a BlogPostPost entry
@@ -9,7 +11,7 @@ class BlogPostsController < ApplicationController
 	# 5. Delete a BlogPost entry
 
 	def new
-		@blog_post = BlogPost.new	
+		@blog_post = @blog.blog_posts.build
 		# Show the HTML form to fill in details of the BlogPost
 		# By convention, rails framework looks for a file called new.html.erb
 		# in app/views/blog_posts folder. This can be overridden.
@@ -22,7 +24,7 @@ class BlogPostsController < ApplicationController
 		# params is the keyword to be used to extract all the request parameters sent 
 		# to this method
 		blog_props = params[:blog_post]
-		@blog_post = BlogPost.new(blog_props)
+		@blog_post = @blog.blog_posts.build(blog_props)
 		if @blog_post.save #=> returns true if object is saved otherwise returns false
 			redirect_to blog_posts_path, :notice => "Your blog post entry has been created!"
 			# show create.html.erb file
@@ -36,25 +38,22 @@ class BlogPostsController < ApplicationController
 	end
 
 	def index
-		@blog_posts = BlogPost.order('created_at DESC')
+		@blog_posts = @blog.blog_posts.order('created_at DESC')
 	end
 
 	def show
-		@blog_post = BlogPost.find(params[:id])
 		#render :layout => false # Turn off layout for this action alone
 		render :layout => 'application' # This action alone uses admin layout irrespective of what layout the controller is configured with
 	end
 
 	def edit
-		@blog_post = BlogPost.find(params[:id])
 	end
 
 	def update
-		@blog_post = BlogPost.find(params[:id])
 		blog_props = params[:blog_post]
 		if @blog_post.update_attributes(blog_props) 
 			# render update.html.erb
-			redirect_to blog_post_path(@blog_post), :notice => "Your blog post entry has been updated!" # Redirect to /blogs/<:id>
+			redirect_to blog_blog_post_path(@blog,@blog_post), :notice => "Your blog post entry has been updated!" # Redirect to /blogs/<:id>
 		else
 			render :edit
 		end
@@ -62,12 +61,21 @@ class BlogPostsController < ApplicationController
 
 
 	def destroy
-		@blog_post = BlogPost.find(params[:id])
 		if @blog_post.destroy
 			redirect_to blog_posts_path, :notice => "Your blog post entry has been deleted!"
 		else
 			redirect_to blog_posts_path, :notice => "Your blog post entry could not be deleted!"
 		end
+	end
+
+	private
+	
+	def load_blog
+		@blog = Blog.find(params[:blog_id])
+	end
+
+	def load_blog_post
+		@blog_post = @blog.blog_posts.find(params[:id])
 	end
 
 end

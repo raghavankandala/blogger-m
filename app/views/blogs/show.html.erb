@@ -15,7 +15,7 @@
 	<div style="border-bottom: 2px dotted #cacaca;padding:10px;">
 	<%= bp.title %> <br/>
 	<%= bp.author %>, <%= bp.published? ? bp.published_at : "[Not Published]" %> <br/>
-	<%= link_to "Read More", blog_post_path(bp) %>
+	<%= link_to "Read More", blog_blog_post_path(bp.blog, bp) %>
 	</div>
 <% end %>
 
